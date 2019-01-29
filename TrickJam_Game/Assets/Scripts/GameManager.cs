@@ -6,8 +6,9 @@ public enum GameStates
 {
     OUTISDE,
     ROOM,
-    PLAY
-
+    PLAY,
+    LOSE,
+    WIN
 }
 
 public enum PotatoState
@@ -66,6 +67,12 @@ public class GameManager : MonoBehaviour
                 CanvasManager.Instance.UpdateGameState(i_State);
                 break;
             case GameStates.PLAY:
+                CanvasManager.Instance.UpdateGameState(i_State);
+                break;
+            case GameStates.LOSE:
+                CanvasManager.Instance.UpdateGameState(i_State);
+                break;
+            case GameStates.WIN:
                 CanvasManager.Instance.UpdateGameState(i_State);
                 break;
             default:

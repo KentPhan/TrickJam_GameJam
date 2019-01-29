@@ -13,6 +13,9 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] private RectTransform m_GameScreen;
 
+    [SerializeField] private RectTransform m_LoseScreen;
+    [SerializeField] private RectTransform m_WinScreen;
+
 
     [SerializeField] private TextMeshProUGUI m_ConnectionText;
     [SerializeField] private TextMeshProUGUI m_UserIDText;
@@ -72,6 +75,8 @@ public class CanvasManager : MonoBehaviour
                 m_HostScreen.gameObject.SetActive(false);
                 m_UserScreen.gameObject.SetActive(false);
 
+                m_LoseScreen.gameObject.SetActive(false);
+                m_WinScreen.gameObject.SetActive(false);
                 break;
             case GameStates.ROOM:
                 m_OutsideScreen.gameObject.SetActive(false);
@@ -94,6 +99,8 @@ public class CanvasManager : MonoBehaviour
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+                m_LoseScreen.gameObject.SetActive(false);
+                m_WinScreen.gameObject.SetActive(false);
 
                 break;
             case GameStates.PLAY:
@@ -103,6 +110,28 @@ public class CanvasManager : MonoBehaviour
 
                 m_HostScreen.gameObject.SetActive(false);
                 m_UserScreen.gameObject.SetActive(false);
+                m_LoseScreen.gameObject.SetActive(false);
+                m_WinScreen.gameObject.SetActive(false);
+                break;
+            case GameStates.LOSE:
+                m_OutsideScreen.gameObject.SetActive(false);
+                m_LobbyScreen.gameObject.SetActive(false);
+                m_GameScreen.gameObject.SetActive(false);
+
+                m_HostScreen.gameObject.SetActive(false);
+                m_UserScreen.gameObject.SetActive(false);
+                m_LoseScreen.gameObject.SetActive(true);
+                m_WinScreen.gameObject.SetActive(false);
+                break;
+            case GameStates.WIN:
+                m_OutsideScreen.gameObject.SetActive(false);
+                m_LobbyScreen.gameObject.SetActive(false);
+                m_GameScreen.gameObject.SetActive(false);
+
+                m_HostScreen.gameObject.SetActive(false);
+                m_UserScreen.gameObject.SetActive(false);
+                m_LoseScreen.gameObject.SetActive(false);
+                m_WinScreen.gameObject.SetActive(true);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(i_newstate), i_newstate, null);

@@ -196,6 +196,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (l_playerID.Equals(PhotonNetwork.LocalPlayer.UserId))
         {
             // Drop Potato
+            GameManager.Instance.DropPotato();
         }// Else
         else
         {
@@ -207,7 +208,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
     }
 
-    public void OnReceiveExploisioni(EventData i_photonEvent)
+    public void OnReceiveExploision(EventData i_photonEvent)
     {
 
     }
