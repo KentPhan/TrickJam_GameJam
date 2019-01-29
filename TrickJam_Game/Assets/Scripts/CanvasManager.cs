@@ -15,6 +15,7 @@ public class CanvasManager : MonoBehaviour
 
 
     [SerializeField] private TextMeshProUGUI m_ConnectionText;
+    [SerializeField] private TextMeshProUGUI m_UserIDText;
 
 
     [SerializeField] private TextMeshProUGUI m_RoomNameValue;
@@ -51,6 +52,11 @@ public class CanvasManager : MonoBehaviour
     public void SetConnectionText(string i_text)
     {
         m_ConnectionText.text = i_text;
+    }
+
+    public void SetUserIDText(string i_text)
+    {
+        m_UserIDText.text = i_text;
     }
 
 

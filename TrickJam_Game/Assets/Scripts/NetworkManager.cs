@@ -45,6 +45,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     void Update()
     {
         CanvasManager.Instance.SetConnectionText(PhotonNetwork.NetworkClientState.ToString());
+        CanvasManager.Instance.SetUserIDText(PhotonNetwork.LocalPlayer.UserId);
     }
 
     public bool ConnectToNetwork()
