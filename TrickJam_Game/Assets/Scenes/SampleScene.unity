@@ -415,7 +415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1562965418
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562965417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: 5.33, z: -0.26901692}
+  m_LocalPosition: {x: 0.28, y: 5.87, z: -0.26901692}
   m_LocalScale: {x: 35.694653, y: 0.37984377, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1153,6 +1153,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5472186486209879344, guid: 48f81b49be77cf94ea49a7f42b963a04,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3395047398416279644, guid: 48f81b49be77cf94ea49a7f42b963a04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1278,6 +1283,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1633759166, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1567015346, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
@@ -1402,7 +1411,7 @@ PrefabInstance:
     - target: {fileID: 2520773252053055206, guid: 8de8a1cf754ca93478c74c2228aec329,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9.12
       objectReference: {fileID: 0}
     - target: {fileID: 2520773252053055206, guid: 8de8a1cf754ca93478c74c2228aec329,
         type: 3}

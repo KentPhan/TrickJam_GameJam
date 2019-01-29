@@ -22,6 +22,7 @@ public class PotatoScript : MonoBehaviour
         if (i_collider.CompareTag("PotatoTriggerZone"))
         {
             GameManager.Instance.LockPotato();
+            GameManager.Instance.SendPotato();
             //Debug.Log(i_collider.gameObject.tag);
         }
 

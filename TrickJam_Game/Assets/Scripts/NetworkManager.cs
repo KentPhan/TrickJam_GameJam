@@ -1,7 +1,6 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
 using UnityEngine;
 
 public enum ClientType
@@ -172,10 +171,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 OnReceivePotato(photonEvent);
                 break;
             case PhotonEventCodes.POTATOEXPLOSION:
-                OnReceivePotato(photonEvent);
+                OnReceiveExplosion(photonEvent);
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -183,8 +180,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         object[] l_data = (object[])i_photonEvent.CustomData;
         GameStates l_state = (GameStates)l_data[0];
-
-        //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
+        GameManager.Instance.UpdateGameState(l_state);
     }
 
     public void OnReceivePotato(EventData i_photonEvent)
@@ -195,22 +191,36 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         // If this Player
         if (l_playerID.Equals(PhotonNetwork.LocalPlayer.UserId))
         {
-            // Drop Potato
-            GameManager.Instance.DropPotato();
+            if (GameManager.Instance.ImDead())
+            {
+                SendPotato();
+                return;
+            }
+            else
+            {
+                // Drop Potato
+                GameManager.Instance.DropPotato();
+            }
         }// Else
         else
         {
             // Do Nothing
         }
 
-        GameManager.Instance.m_CurrentPotatoLocaiton = l_playerID;
+        GameManager.Instance.m_CurrentPotatoLocation = l_playerID;
 
         //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
     }
 
-    public void OnReceiveExploision(EventData i_photonEvent)
+    public void OnReceiveExplosion(EventData i_photonEvent)
     {
-
+        if (GameManager.Instance.IsPotatoHere())
+        {
+            GameManager.Instance.UpdateGameState(GameStates.LOSE);
+            SendPotato();
+            if (m_ClientType == ClientType.USER)
+                PhotonNetwork.Disconnect();
+        }
     }
 
     #endregion
@@ -218,14 +228,36 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     #region RaiseEvents
 
+    public void SendState(GameStates i_State)
+    {
+        object[] l_content = new object[] { i_State };
+        RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
+        SendOptions l_sendOptions = new SendOptions() { Reliability = true };
+        PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.GAMESTATE, l_content, l_eventOptions, l_sendOptions);
+    }
+
     public void SendPotato()
     {
         Player[] l_Players = PhotonNetwork.PlayerListOthers;
+        if (l_Players.Length <= 0)
+        {
+
+        }
+
+
         Player l_Selection = l_Players[UnityEngine.Random.Range(0, l_Players.Length - 1)];
         object[] l_content = new object[] { l_Selection.UserId };
         RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions l_sendOptions = new SendOptions() { Reliability = true };
         PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.POTATOLOCATION, l_content, l_eventOptions, l_sendOptions);
+    }
+
+    public void SendExplosion()
+    {
+        object[] l_content = new object[] { };
+        RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
+        SendOptions l_sendOptions = new SendOptions() { Reliability = true };
+        PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.POTATOEXPLOSION, l_content, l_eventOptions, l_sendOptions);
     }
 
     #endregion
