@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //Screen.orientation = ScreenOrientation.Portrait;
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
                     float l_Ratio = Mathf.Floor(Mathf.Clamp(l_DistanceVector.magnitude, 0.0f, m_DragDistanceLimit)) / m_DragDistanceLimit;
 
                     float l_Speed = Mathf.Floor(Mathf.Lerp(m_MinDragSpeed, m_MaxDragSpeed, l_Ratio));
-                    Debug.Log(l_Ratio + " " + l_DistanceVector.magnitude + " " + l_Speed);
+                    //Debug.Log(l_Ratio + " " + l_DistanceVector.magnitude + " " + l_Speed);
                     m_PotatoLocked.GetComponent<Rigidbody2D>().velocity = l_Direction * l_Speed;
                 }
             }
@@ -120,7 +120,7 @@ public class PlayerScript : MonoBehaviour
                     float l_Ratio = Mathf.Floor(Mathf.Clamp(l_DistanceVector.magnitude, 0.0f, m_DragDistanceLimit)) / m_DragDistanceLimit;
 
                     float l_Speed = Mathf.Floor(Mathf.Lerp(m_MinDragSpeed, m_MaxDragSpeed, l_Ratio));
-                    Debug.Log(l_Ratio + " " + l_DistanceVector.magnitude + " " + l_Speed);
+                    //Debug.Log(l_Ratio + " " + l_DistanceVector.magnitude + " " + l_Speed);
                     m_PotatoLocked.GetComponent<Rigidbody2D>().velocity = l_Direction * l_Speed;
                 }
             }
