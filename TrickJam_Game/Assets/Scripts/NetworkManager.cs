@@ -18,10 +18,10 @@ public enum PhotonEventCodes
 }
 
 
-public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
+public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
 
-    public static NetworkManagerScript Instance;
+    public static NetworkManager Instance;
 
     private ClientType m_ClientType = ClientType.NONE;
 

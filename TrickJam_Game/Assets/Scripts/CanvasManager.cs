@@ -73,7 +73,7 @@ public class CanvasManager : MonoBehaviour
                 m_GameScreen.gameObject.SetActive(false);
 
 
-                switch (NetworkManagerScript.Instance.GetClientType())
+                switch (NetworkManager.Instance.GetClientType())
                 {
                     case ClientType.NONE:
                         break;
@@ -113,7 +113,7 @@ public class CanvasManager : MonoBehaviour
 
         m_RoomNameValue.text = m_RoomNameValue.text.Trim().ToUpper();
 
-        if (NetworkManagerScript.Instance.CreateRoom(m_RoomNameValue.text))
+        if (NetworkManager.Instance.CreateRoom(m_RoomNameValue.text))
         {
             Debug.Log("Create Room Button" + m_RoomNameValue.text);
             return;
@@ -133,7 +133,7 @@ public class CanvasManager : MonoBehaviour
 
         m_RoomNameValue.text = m_RoomNameValue.text.Trim().ToUpper();
 
-        if (NetworkManagerScript.Instance.JoinRoom(m_RoomNameValue.text))
+        if (NetworkManager.Instance.JoinRoom(m_RoomNameValue.text))
         {
             Debug.Log("Join Room Button" + m_RoomNameValue.text);
             return;
