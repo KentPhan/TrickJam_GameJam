@@ -147,4 +147,9 @@ public class GameManager : MonoBehaviour
     {
         return m_CurrentGameStates == GameStates.LOSE;
     }
+
+    public bool GameIsGoing()
+    {
+        return (m_CurrentGameStates == GameStates.PLAY);
+    }
 }

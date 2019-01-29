@@ -27,7 +27,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private ClientType m_ClientType = ClientType.NONE;
 
-    public float PollRate = 0.1f;
+    public float PollRate = 2.0f;
+    public float m_CurrentPollRate;
 
 
     private string m_RoomName;
@@ -43,6 +44,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         DontDestroyOnLoad(this);
 
         ConnectToNetwork();
+        m_CurrentPollRate = PollRate;
     }
 
     // Update is called once per frame
@@ -50,6 +52,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         CanvasManager.Instance.SetConnectionText(PhotonNetwork.NetworkClientState.ToString());
         CanvasManager.Instance.SetUserIDText(PhotonNetwork.LocalPlayer.ActorNumber.ToString());
+
+
+        if (PhotonNetwork.IsConnected)
+        {
+            if (GameManager.Instance.GameIsGoing())
+            {
+                if (m_CurrentPollRate <= 0)
+                {
+                    if (PhotonNetwork.PlayerListOthers.Length == 0)
+                    {
+                        GameManager.Instance.UpdateGameState(GameStates.WIN);
+                    }
+                    m_CurrentPollRate = PollRate;
+                }
+
+
+                m_CurrentPollRate -= Time.deltaTime;
+            }
+        }
     }
 
     public bool ConnectToNetwork()
@@ -152,6 +173,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}.", i_cause);
         m_ClientType = ClientType.NONE;
+        GameManager.Instance.UpdateGameState(GameStates.LOSE);
         //PhotonNetwork.ReconnectAndRejoin();
     }
 
@@ -233,7 +255,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 SendNewHost();
             }
             SendPotato();
-
             PhotonNetwork.Disconnect();
         }
         else
@@ -276,7 +297,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Player[] l_Players = PhotonNetwork.PlayerListOthers;
         if (l_Players.Length <= 0)
         {
-            GameManager.Instance.UpdateGameState(GameStates.WIN);
+            if (PhotonNetwork.IsConnected)
+                GameManager.Instance.UpdateGameState(GameStates.WIN);
+            else
+                GameManager.Instance.UpdateGameState(GameStates.LOSE);
             return;
         }
 
@@ -302,7 +326,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Player[] l_Players = PhotonNetwork.PlayerListOthers;
         if (l_Players.Length <= 0)
         {
-            GameManager.Instance.UpdateGameState(GameStates.WIN);
+            if (PhotonNetwork.IsConnected)
+                GameManager.Instance.UpdateGameState(GameStates.WIN);
+            else
+                GameManager.Instance.UpdateGameState(GameStates.LOSE);
             return;
         }
 
