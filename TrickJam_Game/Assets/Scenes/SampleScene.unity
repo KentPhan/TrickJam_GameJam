@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -984,6 +984,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 94860069576150560, guid: 2a837299686b405438d72ba0334f7a0f,
+        type: 3}
+      propertyPath: m_InputType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a837299686b405438d72ba0334f7a0f, type: 3}
 --- !u!1001 &960379925322000990
@@ -1058,6 +1063,11 @@ PrefabInstance:
       propertyPath: PotatoLocker
       value: 
       objectReference: {fileID: 1562965417}
+    - target: {fileID: 1133268161144165260, guid: ce7663d34afcf334aa1662f9877cd776,
+        type: 3}
+      propertyPath: m_ExplosionTimer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce7663d34afcf334aa1662f9877cd776, type: 3}
 --- !u!114 &1133268161144165260 stripped

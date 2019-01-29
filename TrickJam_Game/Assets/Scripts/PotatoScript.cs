@@ -17,12 +17,26 @@ public class PotatoScript : MonoBehaviour
     }
 
 
+    private bool AlreadyTrigered = false;
+
     public void OnTriggerEnter2D(Collider2D i_collider)
+    {
+        if (i_collider.CompareTag("PotatoTriggerZone") && !AlreadyTrigered)
+        {
+            AlreadyTrigered = true;
+            GameManager.Instance.LockPotato();
+            GameManager.Instance.SendPotato();
+
+            //Debug.Log(i_collider.gameObject.tag);
+        }
+
+    }
+
+    public void OnTriggerExit2D(Collider2D i_collider)
     {
         if (i_collider.CompareTag("PotatoTriggerZone"))
         {
-            GameManager.Instance.LockPotato();
-            GameManager.Instance.SendPotato();
+            AlreadyTrigered = false;
             //Debug.Log(i_collider.gameObject.tag);
         }
 
