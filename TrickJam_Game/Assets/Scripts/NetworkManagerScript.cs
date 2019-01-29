@@ -37,6 +37,8 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
             Destroy(this);
 
         DontDestroyOnLoad(this);
+
+        ConnectToNetwork();
     }
 
     // Update is called once per frame
@@ -65,10 +67,20 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
     }
 
 
-    public void CreateRoom(string i_RoomName)
+    public bool CreateRoom(string i_RoomName)
     {
-        m_RoomName = i_RoomName;
-        PhotonNetwork.CreateRoom(m_RoomName);
+        if (!PhotonNetwork.IsConnected)
+        {
+            ConnectToNetwork();
+        }
+
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            m_RoomName = i_RoomName;
+            return PhotonNetwork.CreateRoom(m_RoomName);
+        }
+
+        return false;
     }
 
     public override void OnCreatedRoom()
@@ -85,23 +97,19 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public bool JoinRoom(string i_RoomName)
     {
+        if (!PhotonNetwork.IsConnected)
+        {
+            ConnectToNetwork();
+        }
+
 
         if (PhotonNetwork.IsConnectedAndReady)
         {
             m_RoomName = i_RoomName;
             return PhotonNetwork.JoinRoom(m_RoomName);
         }
-        else
-        {
-            if (ConnectToNetwork())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
+        return false;
     }
 
     public override void OnJoinedRoom()

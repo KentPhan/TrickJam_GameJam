@@ -1,8 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-
-
+using WebSocketSharp;
 
 
 public class CanvasManager : MonoBehaviour
@@ -11,6 +10,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_ConnectionText;
 
 
+    [SerializeField] private TextMeshProUGUI m_RoomNameValue;
 
 
     public static CanvasManager Instance;
@@ -61,4 +61,46 @@ public class CanvasManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(i_newstate), i_newstate, null);
         }
     }
+
+    public void CreateRoom()
+    {
+        if (m_RoomNameValue.text.Trim().IsNullOrEmpty())
+        {
+            Debug.Log("Empty String Not Accepted");
+            return;
+        }
+
+        m_RoomNameValue.text = m_RoomNameValue.text.Trim().ToUpper();
+
+        if (NetworkManagerScript.Instance.CreateRoom(m_RoomNameValue.text))
+        {
+            Debug.Log("Create Room Button" + m_RoomNameValue.text);
+            return;
+        }
+
+        Debug.Log("Failed To Create Room Button" + m_RoomNameValue.text);
+        return;
+    }
+
+    public void JoinRoom()
+    {
+        if (m_RoomNameValue.text.Trim().IsNullOrEmpty())
+        {
+            Debug.Log("Empty String Not Accepted");
+            return;
+        }
+
+        m_RoomNameValue.text = m_RoomNameValue.text.Trim().ToUpper();
+
+        if (NetworkManagerScript.Instance.JoinRoom(m_RoomNameValue.text))
+        {
+            Debug.Log("Join Room Button" + m_RoomNameValue.text);
+            return;
+        }
+
+        Debug.Log("Failed To Join Room Button" + m_RoomNameValue.text);
+        return;
+    }
+
+
 }
