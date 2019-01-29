@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public enum GameStates
@@ -43,5 +44,27 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+
+    public void UpdateGameState(GameStates i_State)
+    {
+        switch (i_State)
+        {
+            case GameStates.OUTISDE:
+                break;
+            case GameStates.ROOM:
+                break;
+            case GameStates.PLAY:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(i_State), i_State, null);
+        }
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("Game Manager Start GAme");
+        UpdateGameState(GameStates.PLAY);
     }
 }

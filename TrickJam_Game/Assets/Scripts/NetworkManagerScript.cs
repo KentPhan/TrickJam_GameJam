@@ -184,6 +184,17 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
     }
 
     #endregion
+
+
+    #region Accessors
+
+
+    public ClientType GetClientType()
+    {
+        return m_ClientType;
+    }
+
+    #endregion
 }
 
 
