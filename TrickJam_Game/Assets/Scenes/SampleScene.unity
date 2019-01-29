@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -987,7 +987,7 @@ PrefabInstance:
     - target: {fileID: 94860069576150560, guid: 2a837299686b405438d72ba0334f7a0f,
         type: 3}
       propertyPath: m_InputType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a837299686b405438d72ba0334f7a0f, type: 3}
@@ -1163,11 +1163,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5472186486209879344, guid: 48f81b49be77cf94ea49a7f42b963a04,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3395047398416279644, guid: 48f81b49be77cf94ea49a7f42b963a04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1289,51 +1284,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1072783647, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1633759166, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1567015346, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1567015346, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063180273, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063180273, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1318732143, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1318732143, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2087559838, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2087559838, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7002981593270217996, guid: 48f81b49be77cf94ea49a7f42b963a04,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 626071709750658159, guid: 48f81b49be77cf94ea49a7f42b963a04,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1375,27 +1325,19 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1757014860, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 516467441, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
+    - target: {fileID: 498481062, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 516467441, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
+    - target: {fileID: 498481062, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1680860957, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 940215941, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
+    - target: {fileID: 1620191029, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 940215941, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
+    - target: {fileID: 1620191029, guid: 48f81b49be77cf94ea49a7f42b963a04, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}

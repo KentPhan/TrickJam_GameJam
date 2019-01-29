@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f2332e0640c744992842bbc08a5a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InputType: 0
+  m_InputType: 1
   m_MinDragSpeed: 3
   m_MaxDragSpeed: 20
   m_DragDistanceLimit: 4

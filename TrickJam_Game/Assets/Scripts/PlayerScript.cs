@@ -83,7 +83,7 @@ public class PlayerScript : MonoBehaviour
                 return;
 
 
-            Touch l_touch = Input.GetTouch(1);
+            Touch l_touch = Input.GetTouch(0);
 
             if (l_touch.phase == TouchPhase.Began || l_touch.phase == TouchPhase.Moved)
             {
@@ -125,6 +125,7 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+        CanvasManager.Instance.SetPotatoGrabState(m_InputType.ToString() + " ");
     }
 
 

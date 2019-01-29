@@ -18,6 +18,7 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI m_ConnectionText;
     [SerializeField] private TextMeshProUGUI m_UserIDText;
+    [SerializeField] private TextMeshProUGUI m_PotatoGrabState;
 
 
     [SerializeField] private TextMeshProUGUI m_RoomNameValue;
@@ -59,6 +60,11 @@ public class CanvasManager : MonoBehaviour
     public void SetUserIDText(string i_text)
     {
         m_UserIDText.text = i_text;
+    }
+
+    public void SetPotatoGrabState(string i_text)
+    {
+        m_PotatoGrabState.text = i_text;
     }
 
 
