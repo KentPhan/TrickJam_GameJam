@@ -15,7 +15,8 @@ public enum PhotonEventCodes
 {
     GAMESTATE = 0,
     POTATOLOCATION = 1,
-    POTATOEXPLOSION = 2
+    POTATOEXPLOSION = 2,
+    NEWHOST = 3
 }
 
 
@@ -173,6 +174,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             case PhotonEventCodes.POTATOEXPLOSION:
                 OnReceiveExplosion(photonEvent);
                 break;
+            case PhotonEventCodes.NEWHOST:
+                OnReceiveNewHost(photonEvent);
+                break;
         }
     }
 
@@ -217,9 +221,38 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (GameManager.Instance.IsPotatoHere())
         {
             GameManager.Instance.UpdateGameState(GameStates.LOSE);
-            SendPotato();
+
             if (m_ClientType == ClientType.USER)
-                PhotonNetwork.Disconnect();
+            {
+
+            }
+            else
+            {
+                SendNewHost();
+            }
+            SendPotato();
+
+            PhotonNetwork.Disconnect();
+        }
+        else
+        {
+
+        }
+    }
+
+    public void OnReceiveNewHost(EventData i_photonEvent)
+    {
+        object[] l_data = (object[])i_photonEvent.CustomData;
+        string l_playerID = (string)l_data[0];
+
+        // If this Player
+        if (l_playerID.Equals(PhotonNetwork.LocalPlayer.UserId))
+        {
+            m_ClientType = ClientType.HOST;
+        }// Else
+        else
+        {
+            // Do Nothing
         }
     }
 
@@ -241,7 +274,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Player[] l_Players = PhotonNetwork.PlayerListOthers;
         if (l_Players.Length <= 0)
         {
-
+            GameManager.Instance.UpdateGameState(GameStates.WIN);
+            return;
         }
 
 
@@ -258,6 +292,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions l_sendOptions = new SendOptions() { Reliability = true };
         PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.POTATOEXPLOSION, l_content, l_eventOptions, l_sendOptions);
+    }
+
+    public void SendNewHost()
+    {
+        Player[] l_Players = PhotonNetwork.PlayerListOthers;
+        if (l_Players.Length <= 0)
+        {
+            GameManager.Instance.UpdateGameState(GameStates.WIN);
+            return;
+        }
+
+
+        Player l_Selection = l_Players[UnityEngine.Random.Range(0, l_Players.Length - 1)];
+        object[] l_content = new object[] { l_Selection.UserId };
+        RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
+        SendOptions l_sendOptions = new SendOptions() { Reliability = true };
+        PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.NEWHOST, l_content, l_eventOptions, l_sendOptions);
     }
 
     #endregion
