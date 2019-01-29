@@ -255,7 +255,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 SendNewHost();
             }
             SendPotato();
-            PhotonNetwork.Disconnect();
+            PhotonNetwork.LeaveRoom();
         }
         else
         {
