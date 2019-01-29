@@ -52,10 +52,13 @@ public class GameManager : MonoBehaviour
         switch (i_State)
         {
             case GameStates.OUTISDE:
+                CanvasManager.Instance.UpdateGameState(i_State);
                 break;
             case GameStates.ROOM:
+                CanvasManager.Instance.UpdateGameState(i_State);
                 break;
             case GameStates.PLAY:
+                CanvasManager.Instance.UpdateGameState(i_State);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(i_State), i_State, null);

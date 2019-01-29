@@ -86,6 +86,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnCreatedRoom()
     {
         Debug.Log("Created Room");
+        if (m_ClientType != ClientType.USER)
+            m_ClientType = ClientType.HOST;
+
+        GameManager.Instance.UpdateGameState(GameStates.ROOM);
         base.OnCreatedRoom();
     }
 
@@ -115,7 +119,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
-        //MobileGameManager.Instance.UpdateGameState(GameStates.START);
+        if (m_ClientType != ClientType.HOST)
+            m_ClientType = ClientType.USER;
+        GameManager.Instance.UpdateGameState(GameStates.ROOM);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -140,6 +146,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnDisconnected(DisconnectCause i_cause)
     {
         Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}.", i_cause);
+        m_ClientType = ClientType.NONE;
         //PhotonNetwork.ReconnectAndRejoin();
     }
 
