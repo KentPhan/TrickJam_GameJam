@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private PotatoState m_PotatoState;
 
 
-    public string m_CurrentPotatoLocation;
+    public int m_CurrentPotatoLocation;
 
     public GameObject PotatoLocker;
 

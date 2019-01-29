@@ -49,7 +49,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     void Update()
     {
         CanvasManager.Instance.SetConnectionText(PhotonNetwork.NetworkClientState.ToString());
-        CanvasManager.Instance.SetUserIDText(PhotonNetwork.LocalPlayer.UserId);
+        CanvasManager.Instance.SetUserIDText(PhotonNetwork.LocalPlayer.ActorNumber.ToString());
     }
 
     public bool ConnectToNetwork()
@@ -190,10 +190,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void OnReceivePotato(EventData i_photonEvent)
     {
         object[] l_data = (object[])i_photonEvent.CustomData;
-        string l_playerID = (string)l_data[0];
+        int l_actorNumber = (int)l_data[0];
+
+        Debug.Log("Player " + l_actorNumber + " Recevied Potato");
 
         // If this Player
-        if (l_playerID.Equals(PhotonNetwork.LocalPlayer.UserId))
+        if (l_actorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
         {
             if (GameManager.Instance.ImDead())
             {
@@ -211,7 +213,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             // Do Nothing
         }
 
-        GameManager.Instance.m_CurrentPotatoLocation = l_playerID;
+        GameManager.Instance.m_CurrentPotatoLocation = l_actorNumber;
 
         //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
     }
@@ -243,10 +245,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void OnReceiveNewHost(EventData i_photonEvent)
     {
         object[] l_data = (object[])i_photonEvent.CustomData;
-        string l_playerID = (string)l_data[0];
+        int l_playerID = (int)l_data[0];
 
         // If this Player
-        if (l_playerID.Equals(PhotonNetwork.LocalPlayer.UserId))
+        if (l_playerID == PhotonNetwork.LocalPlayer.ActorNumber)
         {
             m_ClientType = ClientType.HOST;
         }// Else
@@ -280,7 +282,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
         Player l_Selection = l_Players[UnityEngine.Random.Range(0, l_Players.Length - 1)];
-        object[] l_content = new object[] { l_Selection.UserId };
+        object[] l_content = new object[] { l_Selection.ActorNumber };
+
         RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions l_sendOptions = new SendOptions() { Reliability = true };
         PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.POTATOLOCATION, l_content, l_eventOptions, l_sendOptions);
@@ -305,7 +308,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
         Player l_Selection = l_Players[UnityEngine.Random.Range(0, l_Players.Length - 1)];
-        object[] l_content = new object[] { l_Selection.UserId };
+        object[] l_content = new object[] { l_Selection.ActorNumber };
         RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions l_sendOptions = new SendOptions() { Reliability = true };
         PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.NEWHOST, l_content, l_eventOptions, l_sendOptions);

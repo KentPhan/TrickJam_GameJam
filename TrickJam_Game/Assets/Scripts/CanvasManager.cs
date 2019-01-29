@@ -139,7 +139,7 @@ public class CanvasManager : MonoBehaviour
 
     public void CreateRoom()
     {
-        if (m_RoomNameValue.text.Trim() == null || m_RoomNameValue.text.Trim() == string.Empty)
+        if (m_RoomNameValue.text == null || m_RoomNameValue.text.Trim() == string.Empty)
         {
             Debug.Log("Empty String Not Accepted");
             return;
@@ -159,7 +159,7 @@ public class CanvasManager : MonoBehaviour
 
     public void JoinRoom()
     {
-        if (m_RoomNameValue.text.Trim() == null || m_RoomNameValue.text.Trim() == string.Empty)
+        if (m_RoomNameValue.text == null || m_RoomNameValue.text.Trim() == string.Empty)
         {
             Debug.Log("Empty String Not Accepted");
             return;
