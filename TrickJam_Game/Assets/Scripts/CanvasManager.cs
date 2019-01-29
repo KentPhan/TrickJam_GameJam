@@ -25,7 +25,7 @@ public class CanvasManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
-        m_CurrentCanvasState = CanvasState.LOBBY;
+        //m_CurrentCanvasState = CanvasState.LOBBY;
     }
 
     // Start is called before the first frame update
@@ -47,19 +47,18 @@ public class CanvasManager : MonoBehaviour
     }
 
 
-    public void UpdateCanvasState(CanvasState i_newstate)
+    public void UpdateGameState(GameStates i_newstate)
     {
         switch (i_newstate)
         {
-            case CanvasState.LOBBY:
+            case GameStates.OUTISDE:
                 break;
-            case CanvasState.INGAME:
-
+            case GameStates.ROOM:
+                break;
+            case GameStates.PLAY:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(i_newstate), i_newstate, null);
         }
-
-        m_CurrentCanvasState = i_newstate;
     }
 }

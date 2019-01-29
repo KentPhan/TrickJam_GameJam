@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public enum GameState
+public enum GameStates
 {
     OUTISDE,
     ROOM,
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    private GameState m_CurrentCanvasState;
+    private GameStates _mCurrentCanvasStates;
 
 
 
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
 
-        m_CurrentCanvasState = GameState.OUTISDE;
+        _mCurrentCanvasStates = GameStates.OUTISDE;
     }
 
     // Start is called before the first frame update

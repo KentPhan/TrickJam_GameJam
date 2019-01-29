@@ -134,7 +134,7 @@ public class PlayerScript : MonoBehaviour
             Physics2D.Raycast(Camera.main.ScreenToWorldPoint(i_ScreenCoordinates), Vector2.zero);
         if (hitInfo)
         {
-            Debug.Log(hitInfo.transform.gameObject.name);
+            //Debug.Log(hitInfo.transform.gameObject.name);
             return hitInfo.transform.gameObject;
         }
         return null;

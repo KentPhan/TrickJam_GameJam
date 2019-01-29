@@ -25,6 +25,9 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private ClientType m_ClientType = ClientType.NONE;
 
+
+    private string m_RoomName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +67,8 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void CreateRoom(string i_RoomName)
     {
-
+        m_RoomName = i_RoomName;
+        PhotonNetwork.CreateRoom(m_RoomName);
     }
 
     public override void OnCreatedRoom()
@@ -81,16 +85,16 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public bool JoinRoom(string i_RoomName)
     {
-        m_RoomName = i_RoomName;
+
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            return PhotonNetwork.JoinOrCreateRoom(m_RoomName, null, null);
+            m_RoomName = i_RoomName;
+            return PhotonNetwork.JoinRoom(m_RoomName);
         }
         else
         {
             if (ConnectToNetwork())
             {
-                m_EstablishedRoom = true;
                 return true;
             }
             else
@@ -103,7 +107,7 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined Room");
-        MobileGameManager.Instance.UpdateGameState(GameStates.START);
+        //MobileGameManager.Instance.UpdateGameState(GameStates.START);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -115,8 +119,8 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         // Put logic for disconnecting or disconnecting
-        PhotonNetwork.LeaveRoom();
-        MobileGameManager.Instance.UpdateGameState(GameStates.NOT_IN_ROOM);
+        //PhotonNetwork.LeaveRoom();
+        //MobileGameManager.Instance.UpdateGameState(GameStates.NOT_IN_ROOM);
         base.OnPlayerLeftRoom(otherPlayer);
     }
 
@@ -148,14 +152,14 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         object[] l_data = (object[])i_photonEvent.CustomData;
         int l_dataRatio = (int)l_data[0];
-        MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
+        //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
     }
 
     public void OnReceiveGameState(EventData i_photonEvent)
     {
         object[] l_data = (object[])i_photonEvent.CustomData;
         int l_dataRatio = (int)l_data[0];
-        MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
+        //MobileCanvasManager.Instance.UpdatePowerBar(l_dataRatio);
     }
 
     #endregion
@@ -168,7 +172,7 @@ public class NetworkManagerScript : MonoBehaviourPunCallbacks, IOnEventCallback
         object[] l_content = new object[] { i_ID };
         RaiseEventOptions l_eventOptions = new RaiseEventOptions() { Receivers = ReceiverGroup.All };
         SendOptions l_sendOptions = new SendOptions() { Reliability = true };
-        PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.FLASH_LIGHT_TOGGLE, l_content, l_eventOptions, l_sendOptions);
+        //PhotonNetwork.RaiseEvent((byte)PhotonEventCodes.FLASH_LIGHT_TOGGLE, l_content, l_eventOptions, l_sendOptions);
     }
 
     #endregion
