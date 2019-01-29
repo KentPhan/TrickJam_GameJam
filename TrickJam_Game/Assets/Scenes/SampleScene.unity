@@ -1066,7 +1066,7 @@ PrefabInstance:
     - target: {fileID: 1133268161144165260, guid: ce7663d34afcf334aa1662f9877cd776,
         type: 3}
       propertyPath: m_ExplosionTimer
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce7663d34afcf334aa1662f9877cd776, type: 3}
