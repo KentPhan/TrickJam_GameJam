@@ -15,4 +15,15 @@ public class PotatoScript : MonoBehaviour
 
 
     }
+
+
+    public void OnTriggerEnter2D(Collider2D i_collider)
+    {
+        if (i_collider.CompareTag("PotatoTriggerZone"))
+        {
+            GameManager.Instance.LockPotato();
+            //Debug.Log(i_collider.gameObject.tag);
+        }
+
+    }
 }

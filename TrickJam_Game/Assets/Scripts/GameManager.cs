@@ -10,15 +10,23 @@ public enum GameStates
 
 }
 
+public enum PotatoState
+{
+    LIMBO,
+    HERE
+}
+
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
 
-    private GameStates _mCurrentCanvasStates;
+    private GameStates m_CurrentCanvasStates;
 
+    public string m_CurrentPotatoLocaiton;
 
+    public GameObject PotatoLocker;
 
     public void Awake()
     {
@@ -31,7 +39,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
 
-        _mCurrentCanvasStates = GameStates.OUTISDE;
+        m_CurrentCanvasStates = GameStates.OUTISDE;
     }
 
     // Start is called before the first frame update
@@ -69,5 +77,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Manager Start GAme");
         UpdateGameState(GameStates.PLAY);
+    }
+
+    public void DropPotato()
+    {
+        PotatoLocker.SetActive(false);
+    }
+    public void LockPotato()
+    {
+        PotatoLocker.SetActive(true);
     }
 }
